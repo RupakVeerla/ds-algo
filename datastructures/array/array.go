@@ -38,3 +38,7 @@ func (a *New) shiftValues(index int) {
 	delete(a.data, a.length-1)
 	a.length--
 }
+
+func (a *New) Length() int {
+	return a.length
+}
