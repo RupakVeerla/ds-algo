@@ -11,24 +11,27 @@ func mergeSortedArrays(arr1, arr2 []int) (r []int) {
 	return
 }
 
-func mergeSortedArrays1(arr1, arr2 []int) (r []int) {
-	arr1val, arr2val := arr1[0], arr2[0]
-	i, j := 1, 1
-	for i <= len(arr1) || j <= len(arr2) {
-		if arr1val < arr2val {
-			r = append(r, arr1val)
-			arr1val = arr1[i]
+func mergeSortedArrays2(arr1, arr2 []int) (r []int) {
+	i, j := 0, 0
+	for i < len(arr1) && j < len(arr2) {
+		if arr1[i] < arr2[j] {
+			r = append(r, arr1[i])
 			i++
+			if i == len(arr1) {
+				r = append(r, arr2[j:]...)
+			}
 		} else {
-			r = append(r, arr2val)
-			arr2val = arr2[j]
+			r = append(r, arr2[j])
 			j++
+			if j == len(arr2) {
+				r = append(r, arr1[i:]...)
+			}
 		}
 	}
-	return
+	return r
 }
 
 func main() {
 	fmt.Println(mergeSortedArrays([]int{0, 3, 10, 43}, []int{5, 8, 31, 42}))
-	fmt.Println(mergeSortedArrays1([]int{0, 3, 10, 43}, []int{5, 8, 31, 42, 69}))
+	fmt.Println(mergeSortedArrays2([]int{0, 3, 10, 43}, []int{5, 8, 31, 42, 69}))
 }
