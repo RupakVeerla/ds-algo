@@ -17,16 +17,15 @@ func mergeSortedArrays2(arr1, arr2 []int) (r []int) {
 		if arr1[i] < arr2[j] {
 			r = append(r, arr1[i])
 			i++
-			if i == len(arr1) {
-				r = append(r, arr2[j:]...)
-			}
 		} else {
 			r = append(r, arr2[j])
 			j++
-			if j == len(arr2) {
-				r = append(r, arr1[i:]...)
-			}
 		}
+	}
+	if i < len(arr1) {
+		r = append(r, arr1[i:]...)
+	} else {
+		r = append(r, arr2[j:]...)
 	}
 	return r
 }
